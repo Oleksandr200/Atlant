@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 
-from crm.companies import router as companies_router
-from crm.contacts import router as contacts_router
-from crm.deals import router as deals_router
+from handlers.companies import router as companies_router
+from handlers.contacts import router as contacts_router
+from db.database import Base, engine
+from handlers.deals import router as deals_router
+from db import db_models  # noqa: F401  # Register ORM models before table creation.
 
 
 app = FastAPI(
@@ -10,6 +12,8 @@ app = FastAPI(
     version="0.1.0",
     description="A base CRM API for managing companies, contacts, and deals.",
 )
+
+Base.metadata.create_all(bind=engine)
 
 
 @app.get("/", tags=["system"])

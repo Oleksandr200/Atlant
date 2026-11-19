@@ -1,0 +1,6 @@
+__pycache__
+handlers/__pycache__
+atlant.db
+atlant.db-shm
+atlant.db-wal
+.env
